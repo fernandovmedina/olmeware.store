@@ -17,6 +17,7 @@ import {
   SIDE_LABELS,
 } from "@/lib/constants";
 import { saveDesignDraft } from "@/lib/store";
+import { LOGO_SLUGS } from "@/lib/logos";
 import type { GarmentType, Side } from "@/lib/types";
 
 type Design = {
@@ -49,6 +50,7 @@ const MockupEditor = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [showGuide, setShowGuide] = useState(true);
   const [dragOver, setDragOver] = useState(false);
+  const [logoQuery, setLogoQuery] = useState("");
 
   const svgRef = useRef<SVGSVGElement>(null);
   const dragRef = useRef<DragState | null>(null);
@@ -110,6 +112,35 @@ const MockupEditor = () => {
         reader.readAsDataURL(file);
       });
   };
+
+  const addLogo = (slug: string, at?: { x: number; y: number }) => {
+    const src = `/logos/${slug}.svg`;
+    const img = new Image();
+    img.onload = () => {
+      const aspect = img.naturalHeight / img.naturalWidth || 1;
+      const area = PRINT_AREAS[garment][side];
+      const id = crypto.randomUUID();
+      setDesigns((ds) => [
+        ...ds,
+        {
+          id,
+          src,
+          name: slug,
+          side,
+          cx: at?.x ?? area.x + area.w / 2,
+          cy: at?.y ?? area.y + area.h / 2,
+          w: 240,
+          aspect,
+        },
+      ]);
+      setSelectedId(id);
+    };
+    img.src = src;
+  };
+
+  const filteredLogos = LOGO_SLUGS.filter((s) =>
+    s.includes(logoQuery.trim().toLowerCase()),
+  );
 
   const startDrag = (
     e: React.PointerEvent,
@@ -330,6 +361,39 @@ const MockupEditor = () => {
                 }}
               />
             </label>
+
+            <div className="mt-3">
+              <input
+                type="search"
+                value={logoQuery}
+                onChange={(e) => setLogoQuery(e.target.value)}
+                placeholder="Search tech logos…"
+                className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm focus:border-neutral-400 focus:outline-none"
+              />
+              <div className="mt-2 grid max-h-52 grid-cols-4 gap-1.5 overflow-y-auto">
+                {filteredLogos.map((slug) => (
+                  <button
+                    key={slug}
+                    onClick={() => addLogo(slug)}
+                    title={slug}
+                    className="flex aspect-square items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 p-1.5 hover:border-neutral-400"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/logos/${slug}.svg`}
+                      alt={slug}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </button>
+                ))}
+                {filteredLogos.length === 0 && (
+                  <p className="col-span-4 py-3 text-center text-xs text-neutral-400">
+                    No logos match “{logoQuery}”.
+                  </p>
+                )}
+              </div>
+            </div>
+
             <ul className="mt-3 flex flex-col gap-2">
               {sideDesigns.map((d) => (
                 <li

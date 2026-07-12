@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: "Products", href: "/admin/products" },
   { label: "New product", href: "/admin/products/new" },
   { label: "Collections", href: "/admin/collections" },
+  { label: "Logo library", href: "/admin/logos" },
   { label: "Mockup editor", href: "/admin/create" },
 ];
 
