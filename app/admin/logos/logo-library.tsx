@@ -10,10 +10,12 @@ type Logo = {
 };
 
 const ALL_CATEGORIES = "All";
+const PAGE_SIZE = 35;
 
 const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(ALL_CATEGORIES);
+  const [page, setPage] = useState(1);
   const categories = useMemo(
     () => [
       ALL_CATEGORIES,
@@ -35,9 +37,15 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
           logo.category.toLowerCase().includes(q)),
     );
   }, [category, logos, query]);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const visibleLogos = filtered.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
 
   return (
-    <div className="p-8">
+    <div className="min-w-0 overflow-x-hidden p-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold tracking-tight">Logo library</h1>
         <p className="mt-1 text-sm text-neutral-500">
@@ -50,13 +58,19 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
           <input
             type="search"
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setPage(1);
+            }}
             placeholder="Search logos…"
             className="min-w-64 flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm outline-none focus:border-neutral-500"
           />
           <select
             value={category}
-            onChange={(event) => setCategory(event.target.value)}
+            onChange={(event) => {
+              setCategory(event.target.value);
+              setPage(1);
+            }}
             className="rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm outline-none focus:border-neutral-500"
           >
             {categories.map((item) => (
@@ -66,12 +80,15 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
             ))}
           </select>
         </div>
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+        <div className="mt-3 flex flex-wrap gap-2">
           {categories.map((item) => (
             <button
               key={item}
               type="button"
-              onClick={() => setCategory(item)}
+              onClick={() => {
+                setCategory(item);
+                setPage(1);
+              }}
               className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium transition ${
                 category === item
                   ? "bg-neutral-900 text-white"
@@ -86,7 +103,12 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
 
       <div className="mb-4 flex items-center justify-between text-sm text-neutral-500">
         <p>
-          Showing {filtered.length} of {logos.length}
+          {filtered.length === 0
+            ? "No logos to show"
+            : `Showing ${(currentPage - 1) * PAGE_SIZE + 1}–${Math.min(
+                currentPage * PAGE_SIZE,
+                filtered.length,
+              )} of ${filtered.length}`}
         </p>
         {(query || category !== ALL_CATEGORIES) && (
           <button
@@ -94,6 +116,7 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
             onClick={() => {
               setQuery("");
               setCategory(ALL_CATEGORIES);
+              setPage(1);
             }}
             className="font-medium text-neutral-700 hover:text-neutral-950"
           >
@@ -103,8 +126,8 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
       </div>
 
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
-          {filtered.map((logo) => (
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {visibleLogos.map((logo) => (
             <article
               key={logo.filename}
               className="group overflow-hidden rounded-xl border border-neutral-200 bg-white transition hover:border-neutral-400 hover:shadow-sm"
@@ -137,6 +160,47 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
           <p className="font-medium">No logos found</p>
           <p className="mt-1 text-sm text-neutral-500">Try another name or category.</p>
         </div>
+      )}
+
+      {filtered.length > PAGE_SIZE && (
+        <nav
+          aria-label="Logo library pagination"
+          className="mt-8 flex flex-wrap items-center justify-center gap-2"
+        >
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() => setPage((value) => Math.max(1, value - 1))}
+            className="rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm font-medium text-neutral-700 hover:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (pageNumber) => (
+              <button
+                key={pageNumber}
+                type="button"
+                aria-current={pageNumber === currentPage ? "page" : undefined}
+                onClick={() => setPage(pageNumber)}
+                className={`h-10 min-w-10 rounded-lg px-3 text-sm font-medium transition ${
+                  pageNumber === currentPage
+                    ? "bg-neutral-900 text-white"
+                    : "border border-neutral-300 bg-white text-neutral-700 hover:border-neutral-500"
+                }`}
+              >
+                {pageNumber}
+              </button>
+            ),
+          )}
+          <button
+            type="button"
+            disabled={currentPage === totalPages}
+            onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
+            className="rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm font-medium text-neutral-700 hover:border-neutral-500 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Next
+          </button>
+        </nav>
       )}
     </div>
   );
