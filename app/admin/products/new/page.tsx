@@ -17,25 +17,9 @@ import {
   saveProduct,
 } from "@/lib/store";
 import type { GarmentType, Product, Size, Stack } from "@/lib/types";
+import { LOGO_SLUGS } from "@/lib/logos";
 
-const LOGO_OPTIONS = [
-  "python",
-  "typescript",
-  "javascript",
-  "react",
-  "vuejs",
-  "nextjs",
-  "tailwindcss",
-  "nodejs",
-  "go",
-  "rust",
-  "docker",
-  "kubernetes",
-  "git",
-  "linux",
-  "graphql",
-  "pytorch",
-];
+const LOGO_OPTIONS = LOGO_SLUGS;
 
 const emptyForm = (): Product => ({
   id: crypto.randomUUID(),
