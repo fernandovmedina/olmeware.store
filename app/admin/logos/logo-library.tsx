@@ -37,7 +37,7 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
   }, [category, logos, query]);
 
   return (
-    <div className="p-8">
+    <div className="min-w-0 overflow-x-hidden p-8">
       <div className="mb-6">
         <h1 className="text-2xl font-bold tracking-tight">Logo library</h1>
         <p className="mt-1 text-sm text-neutral-500">
@@ -66,7 +66,7 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
             ))}
           </select>
         </div>
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+        <div className="mt-3 flex flex-wrap gap-2">
           {categories.map((item) => (
             <button
               key={item}
@@ -103,7 +103,7 @@ const LogoLibrary = ({ logos }: { logos: Logo[] }) => {
       </div>
 
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {filtered.map((logo) => (
             <article
               key={logo.filename}

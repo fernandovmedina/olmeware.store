@@ -72,10 +72,7 @@ All icons/themes available for merch (shirts, sweaters, hoodies, caps).
 - Rails (Ruby on Rails)
 - Symfony
 - Phoenix (Elixir)
-- Actix (Rust)
 - Gin (Go)
-- Fiber (Go)
-- Axum (Rust)
 - .NET / ASP.NET
 - Bun
 - Deno
@@ -136,20 +133,14 @@ All icons/themes available for merch (shirts, sweaters, hoodies, caps).
 - Anthropic / Claude
 - Ollama
 - LangChain
-- LlamaIndex
 - CUDA
-- JAX
 - ONNX
-- Stable Diffusion
-- ComfyUI
 - Jupyter
 - Pandas
 - NumPy
 - Matplotlib
-- Seaborn
 - OpenCV
 - spaCy
-- NLTK
 - MLflow
 - Weights & Biases
 
@@ -248,9 +239,7 @@ All icons/themes available for merch (shirts, sweaters, hoodies, caps).
 ---
 ## APIs & Protocols
 
-- REST
 - GraphQL
-- gRPC
 - WebSockets
 - tRPC
 - MQTT
@@ -260,10 +249,8 @@ All icons/themes available for merch (shirts, sweaters, hoodies, caps).
 ---
 ## Security & Networking
 
-- Burp Suite
 - Kali Linux
 - Wireshark
-- Nmap
 - Metasploit
 - OpenSSL
 
@@ -311,7 +298,6 @@ All icons/themes available for merch (shirts, sweaters, hoodies, caps).
 
 - Google
 - Meta
-- Microsoft
 - Apple
 - Amazon
 - Netflix
@@ -327,6 +313,4 @@ All icons/themes available for merch (shirts, sweaters, hoodies, caps).
 - Bitcoin
 - Web3.js
 - Ethers.js
-- Hardhat
-- Foundry
 - IPFS
