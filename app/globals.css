@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+/* Enable class/attribute-based dark mode driven by [data-theme="dark"] on <html>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  color-scheme: light;
+}
+
+/*
+ * Dark theme.
+ * Tailwind v4 compiles every color utility to `var(--color-*)`, so remapping the
+ * theme variables here flips the whole site without touching any className.
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --color-white: oklch(0.205 0 0); /* cards / bg-white surfaces */
+  --color-black: oklch(0.98 0 0); /* text-black (rare) */
+
+  /* Neutral ramp — inverted and tuned for legibility on dark */
+  --color-neutral-50: oklch(0.17 0 0); /* app backdrop / subtle bg */
+  --color-neutral-100: oklch(0.205 0 0); /* muted surface */
+  --color-neutral-200: oklch(0.26 0 0); /* borders */
+  --color-neutral-300: oklch(0.31 0 0); /* stronger borders */
+  --color-neutral-400: oklch(0.45 0 0); /* faint text / icons */
+  --color-neutral-500: oklch(0.62 0 0); /* muted text */
+  --color-neutral-600: oklch(0.7 0 0); /* secondary text */
+  --color-neutral-700: oklch(0.8 0 0);
+  --color-neutral-800: oklch(0.9 0 0);
+  --color-neutral-900: oklch(0.96 0 0); /* primary text / primary button bg */
+  --color-neutral-950: oklch(0.985 0 0);
+
+  /* Accent tints remapped so light-tint backgrounds stay dark and text stays readable */
+  --color-red-50: oklch(0.26 0.09 26);
+  --color-red-600: oklch(0.71 0.19 22);
+  --color-green-100: oklch(0.27 0.07 153);
+  --color-green-200: oklch(0.34 0.09 153);
+  --color-green-700: oklch(0.87 0.15 154);
+  --color-sky-50: oklch(0.29 0.07 243);
+  --color-sky-100: oklch(0.37 0.09 240);
+  --color-sky-700: oklch(0.83 0.11 230);
+  --color-amber-600: oklch(0.83 0.16 82);
+}
+
+body {
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+}

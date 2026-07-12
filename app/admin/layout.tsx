@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useHydrated, useSession } from "@/lib/hooks";
 import { logout } from "@/lib/store";
+import ThemeToggle from "@/components/theme-toggle";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin" },
@@ -71,7 +72,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           })}
         </nav>
         <div className="border-t border-neutral-800 p-4 text-sm">
-          <p className="truncate text-neutral-400">{session.email}</p>
+          <div className="flex items-center justify-between gap-2">
+            <p className="truncate text-neutral-400">{session.email}</p>
+            <ThemeToggle className="shrink-0 border-neutral-700 text-neutral-400 hover:text-white" />
+          </div>
           <div className="mt-3 flex items-center justify-between">
             <Link href="/" className="text-neutral-400 hover:text-white">
               View store

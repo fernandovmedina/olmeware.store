@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart, useHydrated, useSession } from "@/lib/hooks";
 import { logout } from "@/lib/store";
+import ThemeToggle from "@/components/theme-toggle";
 
 const NAV_LINKS = [
   { label: "Shop all", href: "/shop" },
@@ -38,6 +39,7 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex items-center gap-4 text-sm">
+          <ThemeToggle />
           {hydrated && session ? (
             <div className="flex items-center gap-3">
               {session.role === "admin" && (

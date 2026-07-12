@@ -12,8 +12,17 @@ export const metadata: Metadata = {
   description: "Tech Clothing & More",
 };
 
+const themeInit = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();`;
+
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
-  <html lang="en" className={`${roboto.variable} h-full antialiased`}>
+  <html
+    lang="en"
+    suppressHydrationWarning
+    className={`${roboto.variable} h-full antialiased`}
+  >
+    <head>
+      <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+    </head>
     <body className="min-h-full flex flex-col">{children}</body>
   </html>
 );
