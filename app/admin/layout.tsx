@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useHydrated, useSession } from "@/lib/hooks";
@@ -22,6 +22,17 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const session = useSession();
   const hydrated = useHydrated();
   const isAdmin = session?.role === "admin";
+  const [collapsed, setCollapsed] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      localStorage.getItem("admin-sidebar") === "collapsed",
+  );
+
+  const toggleSidebar = () =>
+    setCollapsed((c) => {
+      localStorage.setItem("admin-sidebar", c ? "open" : "collapsed");
+      return !c;
+    });
 
   useEffect(() => {
     if (hydrated && !isAdmin) router.replace("/login");
@@ -37,7 +48,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex min-h-screen bg-neutral-100 text-neutral-900">
-      <aside className="fixed inset-y-0 left-0 z-40 flex w-56 flex-col bg-neutral-950 text-neutral-300">
+      <aside
+        className={`fixed inset-y-0 left-0 z-40 flex w-56 flex-col bg-neutral-950 text-neutral-300 transition-transform duration-300 ${
+          collapsed ? "-translate-x-full" : ""
+        }`}
+      >
         <Link
           href="/admin"
           className="px-5 py-5 text-lg font-black tracking-tight text-white"
@@ -92,7 +107,36 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </aside>
-      <div className="ml-56 flex-1">{children}</div>
+      <button
+        type="button"
+        onClick={toggleSidebar}
+        aria-label={collapsed ? "Open sidebar" : "Collapse sidebar"}
+        title={collapsed ? "Open sidebar" : "Collapse sidebar"}
+        className={`fixed top-5 z-50 flex h-8 w-8 items-center justify-center rounded-full border border-neutral-300 bg-white text-neutral-600 shadow-sm transition-[left,color] duration-300 hover:text-neutral-900 ${
+          collapsed ? "left-3" : "left-52"
+        }`}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`h-4 w-4 transition-transform duration-300 ${
+            collapsed ? "rotate-180" : ""
+          }`}
+        >
+          <path d="M15 6l-6 6 6 6" />
+        </svg>
+      </button>
+      <div
+        className={`flex-1 transition-[margin] duration-300 ${
+          collapsed ? "ml-12" : "ml-56"
+        }`}
+      >
+        {children}
+      </div>
     </div>
   );
 };
