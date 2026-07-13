@@ -31,7 +31,6 @@ export type Product = {
   collectionId?: string;
   featured?: boolean;
   status: ProductStatus;
-  stock: number;
   createdAt: string;
 };
 

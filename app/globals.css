@@ -44,6 +44,26 @@
   --color-amber-600: oklch(0.83 0.16 82);
 }
 
+/*
+ * Opt-out subtree: restores Tailwind's original palette so the surface keeps its
+ * light-mode look in dark mode (used by the admin sidebar).
+ */
+:root[data-theme="dark"] .theme-lock {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-neutral-50: oklch(0.985 0 0);
+  --color-neutral-100: oklch(0.97 0 0);
+  --color-neutral-200: oklch(0.922 0 0);
+  --color-neutral-300: oklch(0.87 0 0);
+  --color-neutral-400: oklch(0.708 0 0);
+  --color-neutral-500: oklch(0.556 0 0);
+  --color-neutral-600: oklch(0.439 0 0);
+  --color-neutral-700: oklch(0.371 0 0);
+  --color-neutral-800: oklch(0.269 0 0);
+  --color-neutral-900: oklch(0.205 0 0);
+  --color-neutral-950: oklch(0.145 0 0);
+}
+
 body {
   background-color: var(--color-neutral-50);
   color: var(--color-neutral-900);

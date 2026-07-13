@@ -49,7 +49,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen bg-neutral-100 text-neutral-900">
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-56 flex-col bg-neutral-950 text-neutral-300 transition-transform duration-300 ${
+        className={`theme-lock fixed inset-y-0 left-0 z-40 flex w-56 flex-col bg-neutral-950 text-neutral-300 transition-transform duration-300 ${
           collapsed ? "-translate-x-full" : ""
         }`}
       >

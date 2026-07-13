@@ -58,7 +58,6 @@ const ProductPage = () => {
     )
     .slice(0, 4);
   const view = views[Math.min(viewIndex, views.length - 1)];
-  const outOfStock = product.stock === 0;
 
   const handleAdd = () => {
     if (!size) return;
@@ -178,7 +177,7 @@ const ProductPage = () => {
               </button>
               <span className="w-10 text-center text-sm font-medium">{qty}</span>
               <button
-                onClick={() => setQty((q) => Math.min(product.stock || 99, q + 1))}
+                onClick={() => setQty((q) => Math.min(99, q + 1))}
                 className="px-4 py-2 text-lg hover:bg-neutral-100"
               >
                 +
@@ -188,24 +187,18 @@ const ProductPage = () => {
 
           <button
             onClick={handleAdd}
-            disabled={outOfStock || !size}
+            disabled={!size}
             className="rounded-lg bg-neutral-900 px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:bg-neutral-300"
           >
-            {outOfStock
-              ? "Sold out"
-              : added
-                ? "Added to cart ✓"
-                : size
-                  ? "Add to cart"
-                  : "Select a size"}
+            {added
+              ? "Added to cart ✓"
+              : size
+                ? "Add to cart"
+                : "Select a size"}
           </button>
 
           <p className="text-sm text-neutral-500">
-            {outOfStock
-              ? "This product is currently unavailable."
-              : product.stock <= 10
-                ? `Only ${product.stock} left in stock.`
-                : "In stock and ready to ship."}
+            Made to order. Production begins after your order is confirmed.
           </p>
         </div>
       </div>

@@ -59,7 +59,6 @@ const AdminProductsPage = () => {
               <th className="px-4 py-3">Stack</th>
               <th className="px-4 py-3">Collection</th>
               <th className="px-4 py-3">Price</th>
-              <th className="px-4 py-3">Stock</th>
               <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3 text-right">Actions</th>
             </tr>
@@ -90,19 +89,6 @@ const AdminProductsPage = () => {
                 <td className="px-4 py-3">{STACK_LABELS[p.stack]}</td>
                 <td className="px-4 py-3">{collectionName(p.collectionId)}</td>
                 <td className="px-4 py-3 font-medium">{formatPrice(p.price)}</td>
-                <td className="px-4 py-3">
-                  <span
-                    className={
-                      p.stock === 0
-                        ? "font-semibold text-red-600"
-                        : p.stock <= 10
-                          ? "font-semibold text-amber-600"
-                          : ""
-                    }
-                  >
-                    {p.stock}
-                  </span>
-                </td>
                 <td className="px-4 py-3">
                   <button
                     onClick={() =>
@@ -143,7 +129,7 @@ const AdminProductsPage = () => {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={8} className="px-4 py-10 text-center text-neutral-500">
+                <td colSpan={7} className="px-4 py-10 text-center text-neutral-500">
                   No products found.
                 </td>
               </tr>

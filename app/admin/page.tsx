@@ -33,9 +33,7 @@ const AdminDashboard = () => {
   const collections = useCollections();
 
   const active = products.filter((p) => p.status === "active");
-  const lowStock = products.filter((p) => p.stock > 0 && p.stock <= 10);
-  const soldOut = products.filter((p) => p.stock === 0);
-  const inventoryValue = products.reduce((sum, p) => sum + p.price * p.stock, 0);
+  const drafts = products.filter((p) => p.status === "draft");
   const recent = [...products]
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
     .slice(0, 6);
@@ -70,14 +68,14 @@ const AdminDashboard = () => {
           hint={`${active.length} active · ${products.length - active.length} draft`}
         />
         <StatCard
-          label="Inventory value"
-          value={formatPrice(inventoryValue)}
-          hint="Price × stock across the catalog"
+          label="Active products"
+          value={String(active.length)}
+          hint="Visible on the storefront"
         />
         <StatCard
-          label="Low stock"
-          value={String(lowStock.length)}
-          hint={`${soldOut.length} sold out`}
+          label="Draft products"
+          value={String(drafts.length)}
+          hint="Hidden from customers"
         />
         <StatCard
           label="Collections"

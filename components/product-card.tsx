@@ -10,16 +10,11 @@ const ProductCard = ({ product }: { product: Product }) => (
     href={`/product/${product.id}`}
     className="group flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white transition hover:border-neutral-400 hover:shadow-md"
   >
-    <div className="relative bg-neutral-100 p-4">
+    <div className="bg-neutral-100 p-4">
       <ProductVisual
         product={product}
         className="aspect-square w-full object-contain transition group-hover:scale-[1.03]"
       />
-      {product.stock === 0 && (
-        <span className="absolute left-3 top-3 rounded-full bg-neutral-900 px-2.5 py-1 text-xs font-medium text-white">
-          Sold out
-        </span>
-      )}
     </div>
     <div className="flex flex-1 flex-col gap-1 p-4">
       <p className="text-xs uppercase tracking-wide text-neutral-500">

@@ -36,7 +36,6 @@ const emptyForm = (): Product => ({
   collectionId: undefined,
   featured: false,
   status: "active",
-  stock: 10,
   createdAt: new Date().toISOString(),
 });
 
@@ -233,15 +232,6 @@ const ProductForm = () => {
                 min={0}
                 value={form.price}
                 onChange={(e) => update({ price: Number(e.target.value) })}
-                className={inputClass}
-              />
-            </Field>
-            <Field label="Stock">
-              <input
-                type="number"
-                min={0}
-                value={form.stock}
-                onChange={(e) => update({ stock: Number(e.target.value) })}
                 className={inputClass}
               />
             </Field>

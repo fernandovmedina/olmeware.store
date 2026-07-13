@@ -41,7 +41,6 @@ export const SEED_PRODUCTS: Product[] = [
     collectionId: "col-classics",
     featured: true,
     status: "active",
-    stock: 42,
     createdAt: "2026-05-02T00:00:00.000Z",
   },
   {
@@ -60,7 +59,6 @@ export const SEED_PRODUCTS: Product[] = [
     collectionId: "col-classics",
     featured: true,
     status: "active",
-    stock: 35,
     createdAt: "2026-05-03T00:00:00.000Z",
   },
   {
@@ -78,7 +76,6 @@ export const SEED_PRODUCTS: Product[] = [
     images: [],
     collectionId: "col-classics",
     status: "active",
-    stock: 50,
     createdAt: "2026-05-04T00:00:00.000Z",
   },
   {
@@ -97,7 +94,6 @@ export const SEED_PRODUCTS: Product[] = [
     collectionId: "col-new-arrivals",
     featured: true,
     status: "active",
-    stock: 24,
     createdAt: "2026-06-02T00:00:00.000Z",
   },
   {
@@ -113,7 +109,6 @@ export const SEED_PRODUCTS: Product[] = [
     logo: "/logos/vuejs.svg",
     images: [],
     status: "active",
-    stock: 28,
     createdAt: "2026-05-10T00:00:00.000Z",
   },
   {
@@ -131,7 +126,6 @@ export const SEED_PRODUCTS: Product[] = [
     images: [],
     collectionId: "col-new-arrivals",
     status: "active",
-    stock: 18,
     createdAt: "2026-06-05T00:00:00.000Z",
   },
   {
@@ -150,7 +144,6 @@ export const SEED_PRODUCTS: Product[] = [
     collectionId: "col-new-arrivals",
     featured: true,
     status: "active",
-    stock: 20,
     createdAt: "2026-06-10T00:00:00.000Z",
   },
   {
@@ -166,7 +159,6 @@ export const SEED_PRODUCTS: Product[] = [
     logo: "/logos/nodejs.svg",
     images: [],
     status: "active",
-    stock: 31,
     createdAt: "2026-05-12T00:00:00.000Z",
   },
   {
@@ -182,7 +174,6 @@ export const SEED_PRODUCTS: Product[] = [
     logo: "/logos/go.svg",
     images: [],
     status: "active",
-    stock: 26,
     createdAt: "2026-05-15T00:00:00.000Z",
   },
   {
@@ -200,7 +191,6 @@ export const SEED_PRODUCTS: Product[] = [
     images: [],
     collectionId: "col-classics",
     status: "active",
-    stock: 15,
     createdAt: "2026-05-20T00:00:00.000Z",
   },
   {
@@ -216,7 +206,6 @@ export const SEED_PRODUCTS: Product[] = [
     logo: "/logos/docker.svg",
     images: [],
     status: "active",
-    stock: 40,
     createdAt: "2026-05-22T00:00:00.000Z",
   },
   {
@@ -233,7 +222,6 @@ export const SEED_PRODUCTS: Product[] = [
     logo: "/logos/kubernetes.svg",
     images: [],
     status: "active",
-    stock: 12,
     createdAt: "2026-05-25T00:00:00.000Z",
   },
   {
@@ -249,7 +237,6 @@ export const SEED_PRODUCTS: Product[] = [
     logo: "/logos/git.svg",
     images: [],
     status: "active",
-    stock: 45,
     createdAt: "2026-05-28T00:00:00.000Z",
   },
   {
@@ -265,7 +252,6 @@ export const SEED_PRODUCTS: Product[] = [
     logo: "/logos/linux.svg",
     images: [],
     status: "active",
-    stock: 33,
     createdAt: "2026-06-01T00:00:00.000Z",
   },
   {
@@ -284,7 +270,6 @@ export const SEED_PRODUCTS: Product[] = [
     collectionId: "col-ai-drop",
     featured: true,
     status: "active",
-    stock: 22,
     createdAt: "2026-06-16T00:00:00.000Z",
   },
   {
@@ -301,7 +286,6 @@ export const SEED_PRODUCTS: Product[] = [
     images: [],
     collectionId: "col-new-arrivals",
     status: "active",
-    stock: 19,
     createdAt: "2026-06-18T00:00:00.000Z",
   },
 ];
